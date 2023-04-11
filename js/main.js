@@ -13,31 +13,43 @@ form.addEventListener("submit", (evento) => {
   const quantidade = evento.target.elements["quantidade"];
 
   if (nome.value.trim() === "" || quantidade.value.trim() === "") {
-    alert("Por favor, preencha todos os campos");
+    alert("De vazio já basta sua cabeça, preencha todos os campos");
     return;
   }
+  
+  const existe = itens.find( elemento => elemento.nome === nome.value)
 
   const itemAtual = {
-    nome: nome.value,
-    quantidade: quantidade.value,
-  };
+    "nome": nome.value,
+    "quantidade": quantidade.value
+  }
 
-  criaElemento(itemAtual);
+  if (existe) {
+    itemAtual.id = existe.id
 
-  itens.push(itemAtual);
+    atualizaElemento(itemAtual)
+    itens[existe.id] = itemAtual
+  } else {
+    itemAtual.id = itens.length
+
+    criaElemento(itemAtual)
+
+    itens.push(itemAtual)
+  }
 
   localStorage.setItem("itens", JSON.stringify(itens));
 
   nome.value = "";
   quantidade.value = "";
-});
+})
 
 function criaElemento(item) {
   const novoItem = document.createElement("li");
   novoItem.classList.add("item");
 
   const numeroItem = document.createElement("strong");
-  numeroItem.innerHTML = item.quantidade;
+  numeroItem.innerHTML = item.quantidade
+  numeroItem.dataset.id = item.id
   novoItem.appendChild(numeroItem);
 
   novoItem.innerHTML += item.nome;
@@ -54,4 +66,8 @@ function validarFormulario() {
   }
 
   return true;
+}
+
+function atualizaElemento(item) {
+  document.querySelector("[data-id='"+item.id+"']").innerHTML = item.quantidade
 }

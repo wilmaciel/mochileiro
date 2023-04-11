@@ -69,13 +69,14 @@ html {
 .mochila:after {
     margin-left: 67px;
     margin-top: -30px;
-    background: #cca16a;
-    width:26px;
-    height:26px;
+    width: 26px;
+    height: 26px;
     border: 3px solid #491033;
     border-radius: 3px;
-    transform: rotate(45deg);
-}
+    /* transform: rotate(45deg); */
+    background: url("/img/wm.png") center center no-repeat;
+    opacity: 0.5;
+    }
 
 .adicionar {
     width: 100%;
