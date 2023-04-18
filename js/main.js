@@ -54,6 +54,8 @@ function criaElemento(item) {
 
   novoItem.innerHTML += item.nome;
 
+  novoItem.appendChild(botaoDeleta())
+
   lista.appendChild(novoItem);
 }
 
@@ -70,4 +72,19 @@ function validarFormulario() {
 
 function atualizaElemento(item) {
   document.querySelector("[data-id='"+item.id+"']").innerHTML = item.quantidade
+}
+
+function botaoDeleta() {
+  const elementoBotao = document.createElement("button")
+  elementoBotao.innerText = "remover"
+
+  elementoBotao.addEventListener("click", function() {
+    deletaElemento(this.parentNode)
+  })
+
+  return elementoBotao
+}
+
+function deletaElemento(tag) {
+  tag.remove()
 }
