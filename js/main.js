@@ -28,9 +28,10 @@ form.addEventListener("submit", (evento) => {
     itemAtual.id = existe.id
 
     atualizaElemento(itemAtual)
-    itens[existe.id] = itemAtual
+
+    itens[itens.findIndex(elemento => elemento.id === existe.id)] = itemAtual
   } else {
-    itemAtual.id = itens.length
+    itemAtual.id = itens[itens.length - 1] ? (itens[itens.length-1]).id + 1: 0;
 
     criaElemento(itemAtual)
 
@@ -93,3 +94,10 @@ function deletaElemento(tag, id) {
 
   localStorage.setItem("itens", JSON.stringify(itens))
 }
+
+// const btnImprimir = document.getElementById("btnImprimir");
+
+const btnImprimir = document.querySelector(".imprimir");
+btnImprimir.addEventListener("click", () => {
+  window.print();
+});
